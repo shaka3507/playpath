@@ -1,0 +1,14 @@
+.header {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 48px;
+	background-color: lightblue;
+	width: 100%;
+	color: black;
+	padding: 4px 12px;
+	line-height: 48px;
+	text-align: left;
+	font-weight: 800;
+}
