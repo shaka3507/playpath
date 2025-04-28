@@ -1,5 +1,5 @@
 function Title({ titleText }) {
-	return <h1>{titleText}</h1>
+	return <h1 className="logo">{titleText}</h1>
 }
 
 export default Title

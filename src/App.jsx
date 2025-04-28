@@ -78,9 +78,6 @@ function App() {
         PlayPath       {!!data.length && <button className="reset" onClick={() => setData([])}> Reset Search </button>}
       </div>
       {!data.length && <div className="main">
-      <div>
-        <img src={heroPic} className="hero" />
-      </div>
       <Title titleText="PlayPath" />
       <form onSubmit={handleSubmit}>
       <input className="search-bar" onChange={handleInputChange} placeholder="search by zipcode" value={search}/>
