@@ -1,0 +1,34 @@
+.playground {
+	background-color:  #d8e6ad;
+	color: white;
+	height: 100%;
+	width: 400px;
+	border-radius: 8px;
+	margin-top: 8px;
+	text-align: left;
+}
+
+.address {
+	color: black;
+	font-size: 18px;
+	text-decoartion: underline;
+	text-align: left;
+	padding-left: 8px;
+}
+
+.img {
+	width: 400px;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+}
+
+
+.playground-header {
+	font-size: 28px;
+	font-weight: 700;
+	margin: 4px 0px;
+	padding-left: 8px;
+	color: black;
+	display: flex;
+	justify-content: space-between;
+}
