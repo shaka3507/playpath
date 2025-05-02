@@ -1,60 +1,19 @@
 import { useState } from 'react'
+import { Routes, Route, Link, useParams, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './App.css'
 import Title from './ui/Title.jsx'
 import Loader from './ui/Loader.jsx'
 import PlaygroundList from './ui/PlaygroundList.jsx'
 import heroPic from './assets/slide.jpg'
-
-const fakeData = [
-        {
-          'name': 'Arthur Ashe Park',
-          'address': '2701 E. 74th St. Chicago, IL 60649',
-          'img_url': 'https://assets.chicagoparkdistrict.com/s3fs-public/styles/558x314/public/images/locations/0ea5ecd5bd0c459c810486b8d0cad24e1.JPG?itok=SaaAP3oQ',
-          'tags': ['toddler-friendly', 'ada accessible', 'cta accessible', 'lake-view']
-
-        },
-        {
-          'name': 'Bartelme Park',
-          'address': '115 S. Sangamon St Chicago, IL 60602',
-          'img_url': 'https://chicagoplaygrounds.com/files/original/466f0a6feb3080f099f2c4d59cf4ffa613be1ef1.jpg',
-          'tags': ['toddler-friendly', 'ada accessible', 'cta accessible', 'lake-view', 'dog-friendly']
-
-        },
-        {
-          'name': 'Arthur Ashe Park',
-          'address': '2701 E. 74th St. Chicago, IL 60649',
-          'img_url': 'https://assets.chicagoparkdistrict.com/s3fs-public/styles/558x314/public/images/locations/0ea5ecd5bd0c459c810486b8d0cad24e1.JPG?itok=SaaAP3oQ',
-          'tags': ['toddler-friendly', 'ada accessible', 'cta accessible', 'lake-view']
-
-        },
-        {
-          'name': 'Bartelme Park',
-          'address': '115 S. Sangamon St Chicago, IL 60602',
-          'img_url': 'https://chicagoplaygrounds.com/files/original/466f0a6feb3080f099f2c4d59cf4ffa613be1ef1.jpg',
-          'tags': ['toddler-friendly', 'ada accessible', 'cta accessible', 'lake-view', 'dog-friendly']
-
-        },
-        {
-          'name': 'Arthur Ashe Park',
-          'address': '2701 E. 74th St. Chicago, IL 60649',
-          'img_url': 'https://assets.chicagoparkdistrict.com/s3fs-public/styles/558x314/public/images/locations/0ea5ecd5bd0c459c810486b8d0cad24e1.JPG?itok=SaaAP3oQ',
-          'tags': ['toddler-friendly', 'ada accessible', 'cta accessible', 'lake-view']
-
-        },
-        {
-          'name': 'Bartelme Park',
-          'address': '115 S. Sangamon St Chicago, IL 60602',
-          'img_url': 'https://chicagoplaygrounds.com/files/original/466f0a6feb3080f099f2c4d59cf4ffa613be1ef1.jpg',
-          'tags': ['toddler-friendly', 'ada accessible', 'cta accessible', 'lake-view', 'dog-friendly']
-
-        }
-]
+import Playground from './ui/Playground'
 
 
-function App() {
+function Home() {
   const [search, setSearch] = useState('')
   const [status, setStatus] = useState('')
   const [data, setData] = useState([])
+  let navigate = useNavigate()
 
   function handleInputChange(e) {
     setSearch(e.target.value)
@@ -64,12 +23,7 @@ function App() {
     e.preventDefault()
     setStatus('loaded')
 
-    try {
-      console.log('searching...', search)
-      setData(fakeData)
-    } catch (e) {
-      setStatus('try again..')
-    }
+    navigate(`/play?q=${search}`)
   }
 
   return (
@@ -83,9 +37,28 @@ function App() {
       <input className="search-bar" onChange={handleInputChange} placeholder="search by zipcode" value={search}/>
       </form>
       </div>}
-      {status === 'loading' ? <Loader /> : <PlaygroundList results={data} />}
     </>
   )
 }
+
+
+function App() {
+
+   return (
+        <Router>
+            <div>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/play" element={<PlaygroundList />} />
+                <Route path="/play/:playgroundId" element={<Playground />} />
+              </Routes>
+
+            </div>
+       </Router>
+       
+  )
+}
+
+
 
 export default App

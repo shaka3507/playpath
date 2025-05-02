@@ -32,3 +32,22 @@
 	display: flex;
 	justify-content: space-between;
 }
+
+.playground-page {
+	display: block;
+	margin: 20px 0;
+	.img {
+		border-radius: 0 !important;
+	}
+}
+
+.playground-text {
+	padding: 20px 8px;
+	margin-left: 4px;
+	width: 100%;
+	h1 {
+		font-size: 28px;
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+}
