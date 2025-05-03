@@ -8,7 +8,6 @@ import PlaygroundList from './ui/PlaygroundList.jsx'
 import heroPic from './assets/slide.jpg'
 import Playground from './ui/Playground'
 
-
 function Home() {
   const [search, setSearch] = useState('')
   const [status, setStatus] = useState('')

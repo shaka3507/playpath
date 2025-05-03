@@ -36,9 +36,16 @@
 .playground-page {
 	display: block;
 	margin: 20px 0;
+	border: 2px solid grey;
+	border-radius: 8px;
+	color: black;
 	.img {
 		border-radius: 0 !important;
 	}
+}
+
+.playground-page:hover { 
+	font-size: 105%;
 }
 
 .playground-text {
