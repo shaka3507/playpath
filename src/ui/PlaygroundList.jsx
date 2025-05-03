@@ -4,7 +4,7 @@ import { Link, useNavigate  } from 'react-router-dom'
 import Playground from './Playground.jsx'
 import './PlaygroundList.css'
 
-import { setLocalStorageItem } from '../localStorageUtil.js'
+import { setLocalStorageItem, getLocalStorageItem } from '../localStorageUtil.js'
 
 const fakeData = [
     {
@@ -4108,6 +4108,7 @@ export default function PlaygroundList() {
 	const [playgrounds, setPlaygrounds] = useState(fakeData)
 	const [filterPlaygrounds, setFilterPlaygrounds] = useState([])
 	const [filterResponse, setFilterResponse] = useState(false)
+	const [visits, setVisits] = useState([])
 	const [zip, setZip] = useState('')
 	const navigate = useNavigate()
 
@@ -4130,7 +4131,7 @@ export default function PlaygroundList() {
 		{playgrounds.map((result, index) => {
 				return (
 					<div onClick={() => savePlayground(result)}>
-						<Playground result={result}  />
+						<Playground result={result} />
 					</div>
 				)
 		})}
