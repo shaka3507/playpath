@@ -1,18 +1,17 @@
 import { useState, useEffect } from 'react'
 import './Playground.css'
 import { getLocalStorageItem, setLocalStorageItem } from '../localStorageUtil.js'
+import Nav from './Nav.jsx'
 
 function Feature({ children }) {
 	return (<div className="pill">{children}</div>)
 }
 
-export default function Playground({ result }) {
+export default function Playground({ result, onClick }) {
 	const [data, setData] = useState({ label: 'loading...', location: '...'})
 	const [saved, setSaved] = useState(false)
 	useEffect(() => {
-		console.log("result", result, saved)
 		if(!result) {
-			console.log("getting here")
 			const selection = getLocalStorageItem('playground')
 			setData(selection)
 		} else {
@@ -35,6 +34,8 @@ export default function Playground({ result }) {
 	const hasFeature = (feature) => data[feature] == "1"
 
 	return (
+		<div onClick={onClick}>
+		<Nav />
 		<div className="playground-page">
 			<div className="card-header">{saved && <span>❤️</span>}</div>
 			<img className="img" />
@@ -53,6 +54,7 @@ export default function Playground({ result }) {
 				<p>size: {data.acres} acres </p>
 				<p><button className="save" onClick={saveVisit}>Save</button></p>
 			</div>
+		</div>
 		</div>
 	)
 }

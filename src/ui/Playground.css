@@ -11,7 +11,7 @@
 .address {
 	color: black;
 	font-size: 18px;
-	text-decoartion: underline;
+	text-decoration: underline;
 	text-align: left;
 	padding-left: 8px;
 }
@@ -53,12 +53,12 @@
 .playground-page {
 	display: block;
 	margin: 20px 0;
-	border: 2px solid grey;
 	border-radius: 8px;
 	color: black;
 	.img {
 		border-radius: 0 !important;
 	}
+	min-height: 400px;
 }
 
 .save {

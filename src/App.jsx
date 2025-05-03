@@ -7,6 +7,9 @@ import Loader from './ui/Loader.jsx'
 import PlaygroundList from './ui/PlaygroundList.jsx'
 import heroPic from './assets/slide.jpg'
 import Playground from './ui/Playground'
+import About from './ui/About'
+import SavedPlaygroundList from './ui/SavedPlaygroundList.jsx';
+import Nav from './ui/Nav.jsx'
 
 function Home() {
   const [search, setSearch] = useState('')
@@ -26,17 +29,15 @@ function Home() {
   }
 
   return (
-    <>
-      <div className="header">
-        PlayPath       {!!data.length && <button className="reset" onClick={() => setData([])}> Reset Search </button>}
-      </div>
-      {!data.length && <div className="main">
-      <Title titleText="PlayPath" />
+    <div className="main">
+      <Nav />
+      {!data.length && <div className="landing">
+      <Title titleText="Playgrounder" />
       <form onSubmit={handleSubmit}>
       <input className="search-bar" onChange={handleInputChange} placeholder="search by zipcode" value={search}/>
       </form>
       </div>}
-    </>
+    </div>
   )
 }
 
@@ -50,6 +51,8 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/play" element={<PlaygroundList />} />
                 <Route path="/play/:playgroundId" element={<Playground />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/favorite" element={<SavedPlaygroundList />} />
               </Routes>
 
             </div>

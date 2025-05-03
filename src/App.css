@@ -14,31 +14,87 @@
   background-color: white;
 }
 
-.reset:hover {
-  background-color: #e6add8;
-}
 
-.header {
-  position: sticky;
-  height: 36px;
+.landing {
+  margin: 200px 20px 20px;
+  width: 50%;
+  text-align: left;
+  background-color: #adbce6;
+  padding: 20px;
+  font-size: 18px;
+}
+.main {
+  background-image: url('./assets/playgroundscene.png');
+  height: 100vh;
+  position: absolute;
   top: 0;
   right: 0;
   left: 0;
-  font-family: 'Tuffy';
-  font-weight: 600;
-  padding: 0;
-  background-color: #adbce6;
-  border: 2px solid black;
-  border-left: 0;
-  border-right: 0;
-  font-size: 14px;
+  background-size: contain;
+}
+
+/* nav */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: black;
+  color: white;
+  height: fit-content;
   line-height: 36px;
-  display: flex;
-  justify-content: space-between;
+  a {
+    color: white;
+  }
+  p {
+    margin-top: 0 !important;
+  }
+  a:hover {
+    text-decoration: underline;
+    font-size: 99%;
+  }
 }
 
-.logo {
-    font-family: 'Tuffy';
-  font-weight: 600;
+.list {
+  margin-top: 100px;
 }
 
+/* color scheme */
+
+.livegreen {
+	background-color: #C6DB1D;
+	color: black;
+}
+
+.brightred {
+	background-color: #DB2B1D;
+	color: black;
+}
+
+
+.brightred {
+	background-color: #DB2B1D;
+	color: black;
+}
+
+.skyblue {
+	background-color: #1D7BDB;
+	color: black;
+}
+
+.jeanblue {
+	background-color: #3E6286;
+	color: black;
+}
+
+.olivegreen {
+	background-color: #585C3A;
+	color: black;
+}
+
+.brownred {
+	background-color: #5C3C3A;
+	color: black;
+}
