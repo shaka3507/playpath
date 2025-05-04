@@ -21,7 +21,7 @@ function googleMapLink(address) {
 
 export default function Playground({ result, onClick }) {
 	const [data, setData] = useState({ label: 'loading...', location: '...'})
-	const [saved, setSaved] = useState(false)
+	const [favorite, setFavorite] = useState(false)
 	useEffect(() => {
 		if(!result) {
 			const selection = getLocalStorageItem('playground')
@@ -31,23 +31,35 @@ export default function Playground({ result, onClick }) {
 		}
 	}, [])
 
+	const hasId = (arr, id) => {
+		return arr.some(play => play.playgroundId == id)
+	}
+
 	useEffect(() => {
-		const visitData = getLocalStorageItem('visits')
-		if(visitData) {
-			setSaved(visitData.visits.indexOf(data.objectid_1) > -1)
+		const favoriteData = getLocalStorageItem('favorites') || []
+		if(favoriteData.length) {
+			const isFavorite = hasId(favoriteData, data.objectid_1)
+			setFavorite(isFavorite)
 		}
 	}, [data])
 
 
-	const saveVisit = () => {
-		const savedVisits = getLocalStorageItem('visits') || { visits: []}
-		if(!saved) {
-			setLocalStorageItem('visits', { visits: [...savedVisits.visits, data.objectid_1]})
+	const saveFavorite = (e) => {
+		e.stopPropagation()
+		const { beach, playground, gymnasium, garden, water_play, pool_outdo, label, location } = data
+		const playgroundId = data.objectid_1.toString()
+		const favoriteData = getLocalStorageItem('favorites') || []
+		let newData = [...favoriteData]
+		if(!favorite) {
+			console.log("add")
+			newData.push({ label, location, playgroundId, beach, playground, gymnasium, garden, water_play, pool_outdo })
+			setFavorite(true)
 		} else {
-			// fix toggle
-			const newVisits = savedVisits.visits.filter((el) => el.objectid_1 !== data.objectid_1 )
-			setLocalStorageItem('visits', { visits: newVisits })
+			console.log("remove")
+			newData = favoriteData.filter((playground) => playground.playgroundId !== playgroundId)
+			setFavorite(false)
 		}
+		setLocalStorageItem('favorites', newData)
 	}
 
 	const hasFeature = (feature) => data[feature] == "1"
@@ -56,22 +68,23 @@ export default function Playground({ result, onClick }) {
 		<div onClick={onClick}>
 		<Nav />
 		<div className={`playground-page ${getRandomBackground()}`}>
-			<div className="card-header">{saved && <span>❤️</span>}</div>
+			<div className="card-header">{favorite && <span>❤️</span>}</div>
 			<img className="img" />
 			<div className="playground-text">
 				<h1 className="">{data.label}</h1>
 				<p>{data.park_class}</p>
 				<a className="address" target="_blank" href={googleMapLink(data.location)}>{data.location}</a>
 				<div className="features">
+				
 					{hasFeature("beach") && <Feature>beach</Feature>}
 					{hasFeature("playground") && <Feature>playground</Feature>}
 					{hasFeature("gymnasium") && <Feature>gym</Feature>}
 					{hasFeature("garden") && <Feature>garden</Feature>}
 					{hasFeature("water_play") && <Feature>water play</Feature>}
-					{hasFeature("pool_outdo") && <Feature>outdoor pool</Feature>}
+					{hasFeature("pool_outdo") && <Feature>pool</Feature>}
 				</div>
 				<p>size: {data.acres} acres </p>
-				<p><button className="save" onClick={saveVisit}>{saved ? 'Remove from list' : 'Save'}</button></p>
+				<p><button className="save" onClick={saveFavorite}>{favorite ? 'Remove from favorites' : 'favorite'}</button></p>
 			</div>
 		</div>
 		</div>

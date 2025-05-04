@@ -32,6 +32,7 @@
 	color: black;
 	margin: 0 8px;
 	background-color: white;
+	box-shadow: 4px 4px black;
 }
 
 .address {
@@ -71,8 +72,8 @@
 }
 
 .save {
-	border: 2px solid black;
 	border-radius: 4px;
+	background-color: black;
 	color: white;
 	font-size: 14px;
 }

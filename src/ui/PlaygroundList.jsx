@@ -4,6 +4,7 @@ import Nav from "./Nav.jsx";
 import Playground from "./Playground.jsx";
 import "./PlaygroundList.css";
 import { fakeData } from "./fakedata.js";
+import { Search } from '../App.jsx'
 
 import {
   setLocalStorageItem,
@@ -31,18 +32,29 @@ export default function PlaygroundList() {
   const [suggestion, setSuggestion] = useState(null);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  // 	const searchParams = window.location.search
-  // 	const filterZipcode = searchParams.substring(3)
-
-  // 	getData(filterZipcode).then(json => {
-  // 		setPlaygrounds(json)
-  // 	})
-  // }, [])
+  useEffect(() => {
+  	const searchParams = window.location.search
+  	const filterZipcode = searchParams.substring(3)
+    // dont get data right now
+  	// getData(filterZipcode).then(json => {
+  	// 	setPlaygrounds(json)
+  	// })
+  }, [])
 
   const savePlayground = (result) => {
     setLocalStorageItem("playground", result)
     navigate(`/play/${result.objectid_1}`)
+  }
+
+  function handleInputChange(e) {
+    setZip(e.target.value)
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    getData(zip).then(json => {
+        setPlaygrounds(fakeData)
+    })
   }
 
   useEffect(() => {
@@ -64,6 +76,9 @@ export default function PlaygroundList() {
         <h1>results ({playgrounds.length})</h1>
         <h2>suggestion of the day</h2>
         {suggestion && <div onClick={() => savePlayground(suggestion)}>{suggestion.label}</div>}
+      </div>
+      <div>
+        <Search placeholder="new search..." handleSubmit={handleSubmit} handleInputChange={handleInputChange} search={zip} />
       </div>
       <div className="list">
         {playgrounds.map((result, index) => (

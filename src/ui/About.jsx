@@ -3,7 +3,7 @@ import Nav from './Nav.jsx'
 
 export default function About() {
     return (
-        <div className="main about">
+        <div className="main container">
             <Nav />
             <h1>About</h1>
             <div>

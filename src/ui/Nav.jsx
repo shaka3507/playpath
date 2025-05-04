@@ -5,10 +5,10 @@ export default function Nav() {
     const [openMenu, setOpenMenu] = useState(false)
     const open = (
         <span>
-        <p><Link to="/play">Play</Link></p>
-        <p><Link to="/favorite">Favorites</Link></p>
-        <p><Link to="/about">About</Link></p>
-        <p>&#94;</p>
+            <p><Link to="/">Home</Link></p>
+            <p><Link to="/play">Play</Link></p>
+            <p><Link to="/about">About</Link></p>
+            <p>&#94;</p>
         </span>
     )
     const closed = <span>Menu</span>
