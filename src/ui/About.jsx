@@ -1,8 +1,10 @@
 import React from 'react'
+import Nav from './Nav.jsx'
 
 export default function About() {
     return (
-        <div>
+        <div className="main about">
+            <Nav />
             <h1>About</h1>
             <div>
                 <p>This tool is for searching the Chicago playgrounds utilizing public Chicago city data</p>
