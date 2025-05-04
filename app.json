@@ -1,6 +1,6 @@
 {
     "name": "Playgrounder App",
-    "description": "App for project",
+    "description": "App for DGMD E-28 Section 1",
     "repository": "https://github.com/heroku/node-js-getting-started",
     "keywords": ["node", "express", "heroku"],
     "image": "heroku/nodejs"
