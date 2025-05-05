@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import './Playground.css'
 import { getLocalStorageItem, setLocalStorageItem } from '../localStorageUtil.js'
 import Nav from './Nav.jsx'
+import Weather from './Weather.jsx'
 
 function Feature({ children }) {
 	return (<div className="pill">{children}</div>)
@@ -22,6 +23,7 @@ function googleMapLink(address) {
 export default function Playground({ result, onClick }) {
 	const [data, setData] = useState({ label: 'loading...', location: '...'})
 	const [favorite, setFavorite] = useState(false)
+	const [isParkPage, setIsParkPage] = useState(false)
 	useEffect(() => {
 		if(!result) {
 			const selection = getLocalStorageItem('playground')
@@ -42,6 +44,12 @@ export default function Playground({ result, onClick }) {
 			setFavorite(isFavorite)
 		}
 	}, [data])
+
+	useEffect(() => {
+		if(window.location.href.includes('/play/')) {
+			setIsParkPage(true)
+		}
+	}, [])
 
 
 	const saveFavorite = (e) => {
@@ -70,6 +78,7 @@ export default function Playground({ result, onClick }) {
 		<div className={`playground-page ${getRandomBackground()}`}>
 			<div className="card-header">{favorite && <span>❤️</span>}</div>
 			<img className="img" />
+			{isParkPage && <div className="weather-container"><Weather /></div>}
 			<div className="playground-text">
 				<h1 className="">{data.label}</h1>
 				<p>{data.park_class}</p>

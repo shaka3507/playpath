@@ -10,9 +10,6 @@ import Playground from "./ui/Playground";
 import About from "./ui/About";
 import Nav from "./ui/Nav.jsx";
 
-const OPEN_MATEO_CHICAGO_WEATHER_API =
-  "https://api.open-meteo.com/v1/forecast?latitude=41.85&longitude=-87.65&hourly=temperature_2m,rain,showers,snow_depth,snowfall&current=temperature_2m&timezone=America%2FChicago&wind_speed_unit=mph&temperature_unit=fahrenheit";
-
 export function Search({
   handleSubmit,
   handleInputChange,
@@ -28,37 +25,6 @@ export function Search({
         value={search}
       />
     </form>
-  );
-}
-
-async function getWeather() {
-  try {
-    const response = await fetch(OPEN_MATEO_CHICAGO_WEATHER_API);
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-
-    const json = await response.json();
-    return json;
-  } catch (error) {
-    console.error(error.message);
-  }
-}
-
-function Weather() {
-  const [temp, setTemp] = useState(0);
-
-  useEffect(() => {
-    getWeather().then((resp) => {
-      console.log("resp", resp);
-      setTemp(resp.current.temperature_2m);
-    });
-  }, []);
-  return (
-    <div className="weather-widget">
-      <h3>weather</h3>
-      <p>{temp}°F</p>
-    </div>
   );
 }
 
@@ -86,7 +52,6 @@ function Home() {
   return (
     <div className="main">
       <Nav />
-      <Weather />
       <div className="landing">
         <Title titleText="Playgrounder" />
         <Search
