@@ -59,11 +59,9 @@ export default function Playground({ result, onClick }) {
 		const favoriteData = getLocalStorageItem('favorites') || []
 		let newData = [...favoriteData]
 		if(!favorite) {
-			console.log("add")
 			newData.push({ label, location, playgroundId, beach, playground, gymnasium, garden, water_play, pool_outdo })
 			setFavorite(true)
 		} else {
-			console.log("remove")
 			newData = favoriteData.filter((playground) => playground.playgroundId !== playgroundId)
 			setFavorite(false)
 		}
@@ -74,28 +72,27 @@ export default function Playground({ result, onClick }) {
 
 	return (
 		<div onClick={onClick}>
-		<Nav active="play" />
-		<div className={`playground-page ${getRandomBackground()}`}>
-			<div className="card-header">{favorite && <span>❤️</span>}</div>
-			<img className="img" />
-			{isParkPage && <div className="weather-container"><Weather /></div>}
-			<div className="playground-text">
-				<h1 className="playground-title">{data.label}</h1>
-				<p>{data.park_class}</p>
-				<a className="address" target="_blank" href={googleMapLink(data.location)}>{data.location}</a>
-				<div className="features">
-				
-					{hasFeature("beach") && <Feature>beach</Feature>}
-					{hasFeature("playground") && <Feature>playground</Feature>}
-					{hasFeature("gymnasium") && <Feature>gym</Feature>}
-					{hasFeature("garden") && <Feature>garden</Feature>}
-					{hasFeature("water_play") && <Feature>water play</Feature>}
-					{hasFeature("pool_outdo") && <Feature>pool</Feature>}
+			<Nav active="play" />
+			<div className={`playground-page ${getRandomBackground()}`}>
+				<div className="card-header">{favorite && <span>❤️</span>}</div>
+				<img className="img" />
+				<div className="playground-text">
+					<h1 className="plaground-title">{data.label}</h1>
+					<p>{data.park_class}</p>
+					<a className="address" target="_blank" href={googleMapLink(data.location)}>{data.location}</a>
+					<div className="features">
+						{hasFeature("beach") && <Feature>beach</Feature>}
+						{hasFeature("playground") && <Feature>playground</Feature>}
+						{hasFeature("gymnasium") && <Feature>gym</Feature>}
+						{hasFeature("garden") && <Feature>garden</Feature>}
+						{hasFeature("water_play") && <Feature>water play</Feature>}
+						{hasFeature("pool_outdo") && <Feature>pool</Feature>}
+					</div>
+					<p>size: {data.acres} acres </p>
+					<p><button className="save" onClick={saveFavorite}>{favorite ? 'Remove from favorites' : 'favorite'}</button></p>
 				</div>
-				<p>size: {data.acres} acres </p>
-				<p><button className="save" onClick={saveFavorite}>{favorite ? 'Remove from favorites' : 'favorite'}</button></p>
+				{isParkPage && <div className="weather-container"><Weather /></div>}
 			</div>
-		</div>
 		</div>
 	)
 }

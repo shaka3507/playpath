@@ -74,16 +74,26 @@ export default function Weather() {
     return HUMAN_FRIENDLY_WEATHER_CODE[weatherCode] || 'no data'
   }
 
+  const getWidgetBackground = () => {
+    if (weatherCode < 3) {
+      return 'clear'
+    } else if (weatherCode >= 3 && weatherCode <= 68) {
+      return 'rain'
+    } else {
+      return 'snow'
+    }
+  }
+
   const weatherContent = (
-    <span>
-      <h3><em>current temperature at the park</em></h3>
-      <p>{temp}°F</p>
-      <span>& {getWeatherCode()}</span>
-    </span>
+    <div className={`${getWidgetBackground()} weather-widget`}>
+      <p>{getWeatherCode()}</p>
+      <p className="temp">{temp}°F</p>
+      <p><i className="fa fa-map-marker" /> {name}</p>
+    </div>
   )
 
   return (
-    <div className="weather-widget">
+    <div>
       {!loaded ? 'loading...' : weatherContent}
     </div>
   )
