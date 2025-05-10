@@ -69,7 +69,6 @@ export default function PlaygroundList() {
     <div className="main playground-container">
       {error && <div> error retrieving data :( </div>}
       {!loading ? playgroundContent : loadContainer}
-      }
     </div>
   );
 }

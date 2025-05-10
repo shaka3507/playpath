@@ -25,12 +25,8 @@ export default function Playground({ result, onClick }) {
 	const [favorite, setFavorite] = useState(false)
 	const [isParkPage, setIsParkPage] = useState(false)
 	useEffect(() => {
-		if(!result) {
-			const selection = getLocalStorageItem('playground')
-			setData(selection)
-		} else {
-			setData(result)
-		}
+		const selection = getLocalStorageItem('playground')
+		setData(selection)
 	}, [])
 
 	const hasId = (arr, id) => {
