@@ -27,6 +27,7 @@ export default function usePlayground(){
 			      setError(response.status)
 			    }
 			    const json = await response.json()
+			    console.log("playground data...", json)
 			    setPlaygroundData(json)
 			  } catch (error) {
 			    console.error(error.message)

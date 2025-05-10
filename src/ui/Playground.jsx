@@ -24,9 +24,15 @@ export default function Playground({ result, onClick }) {
 	const [data, setData] = useState({ label: 'loading...', location: '...'})
 	const [favorite, setFavorite] = useState(false)
 	const [isParkPage, setIsParkPage] = useState(false)
+
 	useEffect(() => {
-		const selection = getLocalStorageItem('playground')
-		setData(selection)
+		if(window.location.href.includes('/play/')) {
+			setIsParkPage(true)
+			const selection = getLocalStorageItem('playground')
+			setData(selection)
+		} else {
+			setData(result)
+		}
 	}, [])
 
 	const hasId = (arr, id) => {
@@ -34,18 +40,13 @@ export default function Playground({ result, onClick }) {
 	}
 
 	useEffect(() => {
+		console.log('pl', window.location.href)
 		const favoriteData = getLocalStorageItem('favorites') || []
 		if(favoriteData.length) {
 			const isFavorite = hasId(favoriteData, data.objectid_1)
 			setFavorite(isFavorite)
 		}
 	}, [data])
-
-	useEffect(() => {
-		if(window.location.href.includes('/play/')) {
-			setIsParkPage(true)
-		}
-	}, [])
 
 
 	const saveFavorite = (e) => {

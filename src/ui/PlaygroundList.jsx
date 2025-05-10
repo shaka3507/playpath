@@ -3,9 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import Nav from "./Nav.jsx";
 import Playground from "./Playground.jsx";
 import "./PlaygroundList.css";
-import { fakeData } from "./fakedata.js";
 import { Search } from '../App.jsx'
 import usePlayground from './usePlayground'
+
+// import { fakeData } from "./fakedata.js"; for debugging purposes
 
 import {
   setLocalStorageItem,
@@ -49,11 +50,11 @@ export default function PlaygroundList() {
         {suggestion && <div onClick={() => savePlayground(suggestion)}>{suggestion.label}</div>}
       </div>
       <div className="list">
-        {playgroundData?.map((result, index) => (
+        {playgroundData?.map((playground, index) => (
           <Playground
-            key={`${result.objectid_1}`}
-            result={result}
-            onClick={() => savePlayground(result)}
+            key={`${playground.objectid_1}`}
+            result={playground}
+            onClick={() => savePlayground(playground)}
           />
         ))}
       </div>
