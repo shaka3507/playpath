@@ -5,41 +5,19 @@ import Playground from "./Playground.jsx";
 import "./PlaygroundList.css";
 import { fakeData } from "./fakedata.js";
 import { Search } from '../App.jsx'
+import usePlayground from './usePlayground'
 
 import {
   setLocalStorageItem,
   getLocalStorageItem,
 } from "../localStorageUtil.js";
 
-async function getData(zip) {
-  const url = `https://data.cityofchicago.org/resource/ejsh-fztr.json?zip=${zip}`;
-  try {
-    const response = await fetch(url, { app_token: "", limit: 200 });
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-
-    const json = await response.json();
-  } catch (error) {
-    console.error(error.message);
-  }
-}
 
 export default function PlaygroundList() {
-  const [playground, setPlayground] = useState({});
-  const [playgrounds, setPlaygrounds] = useState(fakeData);
   const [zip, setZip] = useState("");
   const [suggestion, setSuggestion] = useState(null);
   const navigate = useNavigate();
-
-  useEffect(() => {
-  	const searchParams = window.location.search
-  	const filterZipcode = searchParams.substring(3)
-    // dont get data right now
-  	// getData(filterZipcode).then(json => {
-  	// 	setPlaygrounds(json)
-  	// })
-  }, [])
+  const { playgroundData, error, loading } = usePlayground()
 
   const savePlayground = (result) => {
     setLocalStorageItem("playground", result)
@@ -50,38 +28,28 @@ export default function PlaygroundList() {
     setZip(e.target.value)
   }
 
-  async function handleSubmit(e) {
-    e.preventDefault()
-    getData(zip).then(json => {
-        setPlaygrounds(fakeData)
-    })
-  }
-
   useEffect(() => {
-    const savedIdea = getLocalStorageItem("suggestion");
-    if (playgrounds && !savedIdea) {
-      const playgroundLen = playgrounds.length;
-      const index = Math.floor(Math.random() * playgroundLen);
-      const playgroundIdea = playgrounds[index];
+    const savedIdea = getLocalStorageItem("suggestion")
+    if (playgroundData && !savedIdea) {
+      const playgroundLen = playgroundData.length
+      const index = Math.floor(Math.random() * playgroundLen)
+      const playgroundIdea = playgroundData[index]
       setSuggestion(playgroundIdea);
-      setLocalStorageItem("suggestion", playgroundIdea);
+      setLocalStorageItem("suggestion", playgroundIdea)
     } else {
       setSuggestion(savedIdea);
     }
-  }, [playgrounds]);
+  }, []);
 
-  return (
-    <div className="main playground-container">
+  const playgroundContent = (
+    <>
       <div className="header-container">
-        <h1>results ({playgrounds.length})</h1>
+        <h1>results ({playgroundData?.length})</h1>
         <h2>suggestion of the day</h2>
         {suggestion && <div onClick={() => savePlayground(suggestion)}>{suggestion.label}</div>}
       </div>
-      <div>
-        <Search placeholder="new search..." handleSubmit={handleSubmit} handleInputChange={handleInputChange} search={zip} />
-      </div>
       <div className="list">
-        {playgrounds.map((result, index) => (
+        {playgroundData?.map((result, index) => (
           <Playground
             key={`${result.objectid_1}`}
             result={result}
@@ -89,6 +57,19 @@ export default function PlaygroundList() {
           />
         ))}
       </div>
+    </>
+
+  )
+
+  const loadContainer = (
+    <div> Loading ...</div>
+  )
+
+  return (
+    <div className="main playground-container">
+      {error && <div> error retrieving data :( </div>}
+      {!loading ? playgroundContent : loadContainer}
+      }
     </div>
   );
 }
