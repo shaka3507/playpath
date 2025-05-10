@@ -30,24 +30,19 @@ export function Search({
 }
 
 function Home() {
-  const [search, setSearch] = useState("");
-  const [status, setStatus] = useState("");
-  const [data, setData] = useState([]);
-  let navigate = useNavigate();
+  const [search, setSearch] = useState("")
+  const [status, setStatus] = useState("")
+  const [data, setData] = useState([])
+  let navigate = useNavigate()
 
   function handleInputChange(e) {
-    setSearch(e.target.value);
+    setSearch(e.target.value)
   }
 
   async function handleSubmit(e) {
-    e.preventDefault();
-    setStatus("loaded");
-
-    if (window.location.href.includes("/play")) {
-      console.log("re fetch data");
-    } else {
-      navigate(`/play?q=${search}`);
-    }
+    e.preventDefault()
+    setStatus("loaded")
+    navigate(`/play?q=${search}`)
   }
 
   return (
@@ -62,7 +57,7 @@ function Home() {
         />
       </div>
     </div>
-  );
+  )
 }
 
 function App() {
@@ -78,7 +73,7 @@ function App() {
         </Routes>
       </div>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App
