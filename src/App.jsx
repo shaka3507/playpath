@@ -15,7 +15,7 @@ export function Search({
   handleSubmit,
   handleInputChange,
   search,
-  placeholder = "search by zipcode",
+  placeholder = "Search by Chicago City Zipcode",
 }) {
   return (
     <form onSubmit={handleSubmit}>
@@ -55,6 +55,7 @@ function Home() {
           handleSubmit={handleSubmit}
           search={search}
         />
+        <p>Not from Chicago? <em>Try 60607 (the loop), 60619 (south side), or 60612 (north side)</em></p>
       </div>
     </div>
   )
