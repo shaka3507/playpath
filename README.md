@@ -1,12 +1,37 @@
-# React + Vite
+## Playgrounder - an app for finding, favoriting and planning your playground adventures in Chicago.
+### Built with React + Vite and deployed via Heroku
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### APIs used
+- [Playground Data API from city](https://data.cityofchicago.org/Parks-Recreation/CPD_Parks/ejsh-fztr/about_data)
+	- Data based on https://www.chicagoparkdistrict.com/parks-facilities
+	- Data set includes 617 parks with 81 different attributes for each park.
+- [Open-mateo Free Weather API](https://open-meteo.com/)
+    - Example response:
+    ```
+	 {
+	  ...
+	  "current": {
+	    "time": "2022-01-01T15:00",
+	    "temperature_2m": 2.4,
+	    "wind_speed_10m": 11.9,
+	  },
+	  "hourly": {
+	    "time": ["2022-07-01T00:00","2022-07-01T01:00", ...],
+	    "wind_speed_10m": [3.16,3.02,3.3,3.14,3.2,2.95, ...],
+	    "temperature_2m": [13.7,13.3,12.8,12.3,11.8, ...],
+	    "relative_humidity_2m": [82,83,86,85,88,88,84,76, ...],
+	  }
+	}
+    ```
+    
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Major Components
+- App.jsx: for handling routes, and the main search functionality
+- PlaygroundList.jsx: Gets playground list results, using usePlayground custom hook
+- usePlayground: custom hook created to fetch data from API and allows components to easily access loading status, error and playground data
+- Playground.jsx: View and card ui for single playground
+- Weather.jsx: widget component used to interact with Open MATEO api and display weather data for the lat/long location for the specific playground
+- Title.jsx: Header component that can be shared across components
+- Nav.jsx: Nav component
+- fakeData and fakeWeatherData - examples of data retrieved from API - used for local development
+- localStorageUtil.js - modules used to retrieve, delete and save data in local storage
