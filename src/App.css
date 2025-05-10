@@ -44,7 +44,7 @@
     width: fit-content;
     margin: 60px  auto 0 auto;
   }
-  div {
+  div:not(.calendar-day) {
     border: 2px solid grey;
     padding: 8px;
     background-color: white;

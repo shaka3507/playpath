@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import './Playground.css'
 import { getLocalStorageItem, setLocalStorageItem } from '../localStorageUtil.js'
 import Nav from './Nav.jsx'
+import { Link } from 'react-router-dom'
 import Weather from './Weather.jsx'
 
 function Feature({ children }) {
@@ -25,12 +26,15 @@ export default function Playground({ result, onClick }) {
 	const [favorite, setFavorite] = useState(false)
 	const [isParkPage, setIsParkPage] = useState(false)
 
+	const playgroundRoute = window.location.href.includes('/play/')
+
 	useEffect(() => {
-		if(window.location.href.includes('/play/')) {
+		if(playgroundRoute) {
 			setIsParkPage(true)
 			const selection = getLocalStorageItem('playground')
 			setData(selection)
 		} else {
+			// else use prop
 			setData(result)
 		}
 	}, [])
@@ -71,10 +75,11 @@ export default function Playground({ result, onClick }) {
 		<div onClick={onClick}>
 			<Nav active="play" />
 			<div className={`playground-page ${getRandomBackground()}`}>
-				<div className="card-header">{favorite && <span>❤️</span>}</div>
+				{favorite && !isParkPage && <div className="card-header">❤️</div>}
 				<img className="img" />
 				<div className="playground-text">
 					<h1 className="plaground-title">{data.label}</h1>
+					{favorite && isParkPage && <Link to="/planner">+ to planner 📅</Link>}
 					<p>{data.park_class}</p>
 					<a className="address" target="_blank" href={googleMapLink(data.location)}>{data.location}</a>
 					<div className="features">

@@ -1,17 +1,71 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import Nav from './Nav.jsx'
+import "./Planner.css";
+import { getLocalStorageItem, setLocalStorageItem } from '../localStorageUtil.js'
+
+
+function PlannerDay({ day, favorites, updateItinerary }) {
+    const [dayPlayground, setPlaygroundDay] = useState('')
+
+    const selectPlayground = (fave) => {
+        setPlaygroundDay(fave)
+        updateItinerary('add', `${day.substring(0,3)} - ${fave.label}`)
+
+
+    }
+
+    const removePlayground = (playground) => {
+        setPlaygroundDay('')
+        updateItinerary('remove', `${day.substring(0,3)} - ${playground.label}`)
+    }
+
+
+
+    return (
+        <div className="calendar-day">
+            <h3>{day}</h3>
+            {!dayPlayground  ? 
+                (favorites?.map((fave, idx) => <p onClick={() => selectPlayground(fave)}key={idx} className="play-pill">+{fave.label}</p>)) 
+                : <span className="play-pill selected"onClick={() => removePlayground(dayPlayground)}>-{dayPlayground.label}</span>
+            }
+        </div>
+    )
+}
+
+
 
 export default function Planner() {
+    const [favorites, setFavorites] = useState([])
+    const [itinerary, setItinerary] = useState([])
+
+    const updateItinerary = (itineraryAction, itineraryLabel) => {
+        if(itineraryAction === 'add') {
+            setItinerary([...itinerary, itineraryLabel])
+            console.log("itinerary", itinerary)
+        } else if (itineraryAction === 'remove') {
+            setItinerary(itinerary.filter(day => day != itineraryLabel))
+        }
+
+    }
+
+    useEffect(() => {
+        const favoriteData = getLocalStorageItem('favorites')
+        setFavorites(favoriteData)
+    }, [])
+
+    const SEVEN_DAYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+
     return (
         <div className="main container">
             <Nav active="planner" />
-            <h1>Planner</h1>
-            <div>
-                <p>This tool is for searching the Chicago playgrounds utilizing public Chicago city data</p>
-                <p>This was made for educational purposes only.</p>
-
+            <h1>Seven Day Planner</h1>
+            <h2>Plan a week based on your saved favorites</h2>
+            <div className="calendar">
+                {favorites?.length && SEVEN_DAYS.map(day => <PlannerDay key={day} day={day} favorites={favorites} updateItinerary={updateItinerary} />)}
+                {!favorites && <div> add to your favorites first before adding to your weekly itinerary - <Link to="/">go back to search</Link></div>}
             </div>
-
+            {!!itinerary.length && <div className="share-container"><a href={`mailto:&?subject=Look%20What%20I%20Planned%20&body=${itinerary.join('%0D%0A').replace(' ', '%20').toUpperCase()}`} className="share-btn">Share itinerary</a></div>}
         </div>
     )
 }
