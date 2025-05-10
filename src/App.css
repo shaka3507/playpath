@@ -14,7 +14,6 @@
   background-color: white;
 }
 
-
 .landing {
   margin: 200px 20px 20px;
   width: fit-content;
@@ -125,32 +124,5 @@
   color: white;
 }
 
-.weather-widget {
-  background-color: #C6DB1D;
-  color: black;
-  font-size: 18px;
-  width: 200px;
-  margin-top: 60px;
-  text-align: right;
-  padding: 8px;
-  font-weight: 700;
-}
-
-.weather-container {
-  display: flex;
-  position: absolute;
-  top: 0;
-  right: 10px;
-  p {
-    margin: 4px;
-    font-size: 30px;
-  }
-}
 
 
-@media screen and (max-width: 800px) {
-  /* todo fix this t */
-  .weather-container {
-    display: block;
-  }
-}

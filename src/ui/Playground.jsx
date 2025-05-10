@@ -74,13 +74,13 @@ export default function Playground({ result, onClick }) {
 
 	return (
 		<div onClick={onClick}>
-		<Nav />
+		<Nav active="play" />
 		<div className={`playground-page ${getRandomBackground()}`}>
 			<div className="card-header">{favorite && <span>❤️</span>}</div>
 			<img className="img" />
 			{isParkPage && <div className="weather-container"><Weather /></div>}
 			<div className="playground-text">
-				<h1 className="">{data.label}</h1>
+				<h1 className="playground-title">{data.label}</h1>
 				<p>{data.park_class}</p>
 				<a className="address" target="_blank" href={googleMapLink(data.location)}>{data.location}</a>
 				<div className="features">

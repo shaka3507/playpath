@@ -56,6 +56,10 @@
 	justify-content: space-between;
 }
 
+.playground-title:hover::after {
+	content: " >";
+}
+
 .playground-page {
 	display: block;
 	margin: 20px 0;
@@ -116,12 +120,6 @@
 	font-size: 24px;
 }
 
-/*.playground-page:hover { 
-	background-color: black;
-	color: white;
-	border-color: black;
-}
-*/
 .playground-text {
 	padding: 20px 8px;
 	h1 {
@@ -129,4 +127,39 @@
 		font-weight: 700;
 		text-transform: uppercase;
 	}
+}
+
+.weather-widget {
+  background-color: #C6DB1D;
+  color: black;
+  font-size: 18px;
+  width: 200px;
+  margin-top: 60px;
+  text-align: right;
+  padding: 8px;
+  font-weight: 700;
+  box-shadow: 10px 5px;
+  border-radius: 8px;
+}
+
+.weather-container {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 10px;
+  p {
+    margin: 4px;
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 500px) {
+  .weather-widget {
+  	width: 80px;
+  	font-size: 10px;
+  	margin-top: 250px;
+  	> p {
+  		font-size: 12px;
+  	}
+  }
 }

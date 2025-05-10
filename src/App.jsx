@@ -9,6 +9,7 @@ import heroPic from "./assets/slide.jpg";
 import Playground from "./ui/Playground";
 import About from "./ui/About";
 import Nav from "./ui/Nav.jsx";
+import Planner from "./ui/Planner.jsx";
 
 export function Search({
   handleSubmit,
@@ -51,7 +52,7 @@ function Home() {
 
   return (
     <div className="main">
-      <Nav />
+      <Nav active="home" />
       <div className="landing">
         <Title titleText="Playgrounder" />
         <Search
@@ -73,6 +74,7 @@ function App() {
           <Route path="/play" element={<PlaygroundList />} />
           <Route path="/play/:playgroundId" element={<Playground />} />
           <Route path="/about" element={<About />} />
+          <Route path="/planner" element={<Planner />} />
         </Routes>
       </div>
     </Router>
