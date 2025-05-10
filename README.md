@@ -2,6 +2,8 @@
 
 An app for finding, favoriting and planning your playground adventures in Chicago. Built with React + Vite and deployed via Heroku.
 
+[Live URL](https://playgrounder-a77bf4c8a830.herokuapp.com/)
+
 ### APIs used
 - [Playground Data API from city](https://data.cityofchicago.org/Parks-Recreation/CPD_Parks/ejsh-fztr/about_data)
 	- Data based on https://www.chicagoparkdistrict.com/parks-facilities
@@ -36,3 +38,13 @@ An app for finding, favoriting and planning your playground adventures in Chicag
 - **Nav.jsx**: Nav component
 - **fakeData and fakeWeatherData** - examples of data retrieved from API - used for local development
 - **localStorageUtil.js** - modules used to retrieve, delete and save data in local storage
+
+### How to run locally
+- Run the following `npm install && npm run dev` in your console.
+
+### Features
+- Search for a playground by visiting the home route and adding a [Chicago zipcode](https://www.chicago.gov/content/dam/city/sites/covid/reports/2020-04-24/ChicagoCommunityAreaandZipcodeMap.pdf)
+- Click on a playground returned in the list, or favorite it
+- Favorited playgrounds can be added to your weekly itinerary on the /planner page
+- Playgrounds added to your itinerary are ready to be shared via email (mailto link).
+- Favorited playgrounds are saved to your local storage
