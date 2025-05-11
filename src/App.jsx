@@ -3,7 +3,6 @@ import { Routes, Route, Link, useParams, useNavigate } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import Title from "./ui/Title.jsx";
-import Loader from "./ui/Loader.jsx";
 import PlaygroundList from "./ui/PlaygroundList.jsx";
 import heroPic from "./assets/slide.jpg";
 import Playground from "./ui/Playground";
