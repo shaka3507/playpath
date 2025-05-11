@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 const CHICAGO_PARK_DATA_API = 'https://data.cityofchicago.org/resource/ejsh-fztr.json?zip='
 const CHICAGO_LOOP_ZIPCODE = '60607'
@@ -13,13 +14,15 @@ export default function usePlayground(){
 	const [loading, setLoading] = useState(true)
 	const [playgroundData, setPlaygroundData] = useState(null)
 	const [error, setError] = useState(null)
+	const [zip, setZip] = useState('')
+	const [searchParams, setSearchParams] = useSearchParams()
 
     useEffect(() => {
         (
 			async function getData() {
-		      const searchParams = window.location.search
 		      // if no zipcode provided, default to center of Chicago (The Loop)
-	  		  const filterZipcode = searchParams.substring(3) || CHICAGO_LOOP_ZIPCODE
+	  		  const filterZipcode = searchParams.get('q') || CHICAGO_LOOP_ZIPCODE
+	  		  setZip(filterZipcode)
 			  const url = CHICAGO_PARK_DATA_API + filterZipcode
 			  try {
 			    const response = await fetch(url, { app_token: "", limit: 200 })
@@ -36,7 +39,7 @@ export default function usePlayground(){
 			  }
 			}
         )()
-    }, [])
+    }, [searchParams])
 
-	return { playgroundData, loading, error }
+	return { playgroundData, loading, error, zip }
 }

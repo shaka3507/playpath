@@ -8,13 +8,6 @@ import Features from './Features.jsx'
 
 const NO_IMG_PLACEHOLDER = 'https://playgrounder-images.s3.us-east-2.amazonaws.com/no_picture.png'
 
-function getRandomBackground(isParkPage) {
-	if(isParkPage) return ''
-	const backgroundColor = ['brightred', 'skyblue', 'jeanblue', 'olivegreen', 'brownred', 'brightred', 'skyblue', 'jeanblue', 'olivegreen', 'brownred']
-	const index =  Math.floor(Math.random() * 9)
-	return backgroundColor[index]
-}
-
 function googleMapLink(address) {
 	const formattedAddress = address.replace(' ', '+')
 	return `https://www.google.com/maps/place/${formattedAddress}+Chicago+IL`
@@ -77,24 +70,22 @@ export default function Playground({ result, onClick }) {
 	}
 
 	return (
-		<div onClick={onClick}>
-			<Nav active="play" />
-			<div className={`playground-page ${getRandomBackground(isParkPage)} ${!isParkPage ? 'play-card' : ''}`}>
-				{favorite && !isParkPage && <div className="card-header">❤️</div>}
-				{isParkPage && <img className="img" src={getSrc(data.label)} onError={onImgError}/>}
-				<div className="playground-text">
-					<h1 className="plaground-title">{data.label}</h1>
-					{favorite && isParkPage && <Link to="/planner">+ to planner 📅</Link>}
-					<p>{data.park_class}</p>
-					<a className="address" target="_blank" href={googleMapLink(data.location)}>{data.location}</a>
-					<div className="features">
-						<Features data={data} />
-					</div>
-					<p>size: {data.acres} acres </p>
-					<p><button className="save" onClick={saveFavorite}>{favorite ? 'Remove from favorites' : 'favorite'}</button></p>
+		<div className={`playground-page skyblue ${!isParkPage ? 'play-card' : ''}`} onClick={onClick}>
+			{isParkPage && <Nav active="play" />}
+			{favorite && !isParkPage && <div className="card-header">❤️</div>}
+			{isParkPage && <img className="img" src={getSrc(data.label)} onError={onImgError}/>}
+			<div className="playground-text">
+				<h1 className="plaground-title">{data.label}</h1>
+				{favorite && isParkPage && <Link to="/planner">+ to planner 📅</Link>}
+				<p>{data.park_class}</p>
+				<a className="address" target="_blank" href={googleMapLink(data.location)}>{data.location}</a>
+				<div className="features">
+					<Features data={data} />
 				</div>
-				{isParkPage && <div className="weather-container"><Weather /></div>}
+				<p>size: {data.acres} acres </p>
+				<p><button className="save" onClick={saveFavorite}>{favorite ? 'Remove from favorites' : 'favorite'}</button></p>
 			</div>
+			{isParkPage && <div className="weather-container"><Weather /></div>}
 		</div>
 	)
 }

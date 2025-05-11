@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, useSearchParams } from "react-router-dom"
 import Nav from "./Nav.jsx"
 import Playground from "./Playground.jsx"
 import { Search } from '../App.jsx'
@@ -14,18 +14,15 @@ import {
 
 
 export default function PlaygroundList() {
-  const [zip, setZip] = useState("")
   const [suggestion, setSuggestion] = useState(null)
+  const [newZip, setNewZip] = useState('')
+  const { playgroundData, error, loading, zip } = usePlayground()
+  const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate()
-  const { playgroundData, error, loading } = usePlayground()
 
   const savePlayground = (result) => {
     setLocalStorageItem("playground", result)
     navigate(`/play/${result.objectid_1}`)
-  }
-
-  function handleInputChange(e) {
-    setZip(e.target.value)
   }
 
   useEffect(() => {
@@ -41,12 +38,27 @@ export default function PlaygroundList() {
     }
   }, [])
 
+  const handleInputChange = (e) => {
+    setNewZip(e.target.value)
+  }
+
+  const handleSubmit = (e) => {
+    // if user hits enter - submit new request
+    if(e.key === 'Enter') {
+      setSearchParams({ q: newZip })
+    }
+  }
+
   const playgroundContent = (
     <>
       <div className="header-container">
-        <h1>results ({playgroundData?.length})</h1>
+        <h1>results ({playgroundData?.length}) for {zip}</h1>
         <h2>suggestion of the day</h2>
         {suggestion && <div onClick={() => savePlayground(suggestion)}>{suggestion.label}</div>}
+      </div>
+      <div className="input-container">
+          <h3>New Search?</h3>
+          <input onChange={handleInputChange} onKeyDown={handleSubmit} placeholder="Try 60619" />
       </div>
       <div className="list">
         {playgroundData?.map((playground, index) => (
@@ -56,6 +68,11 @@ export default function PlaygroundList() {
             onClick={() => savePlayground(playground)}
           />
         ))}
+        {(!playgroundData?.length && !loading) && 
+          <div className="empty-results-container">
+            <h3>No results for zipcode "{zip}"</h3> 
+          </div>
+        }
       </div>
     </>
 
@@ -66,9 +83,12 @@ export default function PlaygroundList() {
   )
 
   return (
-    <div className="main playground-container">
-      {error && <div> error retrieving data :( </div>}
-      {!loading ? playgroundContent : loadContainer}
-    </div>
+    <>
+      <Nav active="play" />
+      <div className="main playground-container">
+        {error && <div> error retrieving data :( </div>}
+        {!loading ? playgroundContent : loadContainer}
+      </div>
+    </>
   )
 }

@@ -67,6 +67,27 @@
   }
 }
 
+.input-container {
+  display: inline-block;
+  background-color: white;
+  width: 200px;
+  height: 100%;
+  > input {
+    height: 24px;
+    width: 200px;
+  }
+}
+
+.empty-results-container {
+  height: 100vh;
+  h3 {
+    background-color: white;
+    padding: 30px;
+    border: 1px solid black;
+    border-radius: 8px;
+  }
+}
+
 /* nav */
 
 .nav {
@@ -95,39 +116,20 @@
   font-size: 18px;
 }
 
-/* color scheme */
 
-.livegreen {
-	background-color: #C6DB1D;
-	color: black;
+/*alternates background color of cards*/
+
+.play-card:nth-child(even) {
+  background-color: #878b68;
 }
 
-
-.brightred {
-	background-color: hwb(4 37% 33%);
-	color: black;
+.play-card:nth-child(odd) {
+    background-color: #557ea7f2;
 }
 
-.skyblue {
-	background-color: #74b2effc;
-	color: black;
+.play-card:nth-child(3n-1) {
+  background-color: hwb(4 37% 33%);
 }
-
-.jeanblue {
-	background-color: #557ea7f2;
-	color: black;
-}
-
-.olivegreen {
-	background-color: #878b68;
-	color: black;
-}
-
-.brownred {
-	background-color: #9d7774;
-	color: black;
-}
-
 
 /* favorite */
 
