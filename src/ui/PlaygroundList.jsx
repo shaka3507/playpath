@@ -10,6 +10,7 @@ import usePlayground from './usePlayground'
 import {
   setLocalStorageItem,
   getLocalStorageItem,
+  deleteLocalStorageItem,
 } from "../localStorageUtil.js"
 
 
@@ -26,8 +27,8 @@ export default function PlaygroundList() {
   }
 
   useEffect(() => {
-    const savedIdea = getLocalStorageItem("suggestion")
-    if (playgroundData && !savedIdea) {
+    const savedIdea = getLocalStorageItem("suggestion") || false
+    if (!loading && !savedIdea) {
       const playgroundLen = playgroundData.length
       const index = Math.floor(Math.random() * playgroundLen)
       const playgroundIdea = playgroundData[index]
@@ -36,7 +37,7 @@ export default function PlaygroundList() {
     } else {
       setSuggestion(savedIdea)
     }
-  }, [])
+  }, [zip, loading])
 
   const handleInputChange = (e) => {
     setNewZip(e.target.value)
@@ -46,6 +47,8 @@ export default function PlaygroundList() {
     // if user hits enter - submit new request
     if(e.key === 'Enter') {
       setSearchParams({ q: newZip })
+      // clear out suggestion
+      deleteLocalStorageItem('suggestion')
     }
   }
 

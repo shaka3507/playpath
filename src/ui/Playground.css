@@ -128,7 +128,7 @@
 }
 
 #googleIcon {
-  background-image: url('./assets/google-maps.png');
+  background-image: url('../assets/google-maps.png');
   height: 24px;
   background-size: contain;
   background-repeat: no-repeat, repeat;
