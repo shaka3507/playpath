@@ -204,8 +204,7 @@
 		width: unset;
 	}
 	.weather-container {
-		top: unset;
-		bottom: 20px;
+		top: 40%;
 		justify-content: center;
 	}
   .weather-widget {
