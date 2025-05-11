@@ -29,14 +29,15 @@ An app for finding, favoriting and planning your playground adventures in Chicag
 
 
 ### Major Components
-- **App.jsx**: for handling routes, and the main search functionality
-- **PlaygroundList.jsx**: Gets playground list results, using usePlayground custom hook
+- **App.jsx (view)**: for handling routes, and the main search functionality
+- **PlaygroundList.jsx (view)**: Gets playground list results, using usePlayground custom hook
 - **usePlayground**: custom hook created to fetch data from API and allows components to easily access loading status, error and playground data
-- **Playground.jsx**: View and card ui for single playground
+- **Playground.jsx (view)**: View and card ui for single playground
+- **Features.jsx** - renders pills for each playground card
 - **Weather.jsx**: widget component used to interact with Open MATEO api and display weather data for the lat/long location for the specific playground
-- **Title.jsx**: Header component that can be shared across components
+- **Planner.jsx (view)** - Used to control planner view, with child component that renders a single day in the week
 - **Nav.jsx**: Nav component
-- **fakeData and fakeWeatherData** - examples of data retrieved from API - used for local development
+- **fakePlaygroundData and fakeWeatherData** - examples of data retrieved from API - used for local development
 - **localStorageUtil.js** - modules used to retrieve, delete and save data in local storage
 
 ### How to run locally

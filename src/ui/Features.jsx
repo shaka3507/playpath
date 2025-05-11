@@ -22,14 +22,13 @@ const NORMALIZED_ATTRIBUTE_NAME = {
 	"skate_park": "skate park"
 }
 
-export default function Features({ data, isParkPage }) {
+export default function Features({ data }) {
 	return (
 		<div className="features">
 			{Object.keys(data).map((parkAttribute, idx) => {
 				const attribute = data[parkAttribute]
-				console.log("attribute", attribute)
 				if(attribute == 1 && NORMALIZED_ATTRIBUTE_NAME.hasOwnProperty(parkAttribute)) {
-					return <div className="pill">{NORMALIZED_ATTRIBUTE_NAME[parkAttribute]}</div>
+					return <div key={idx} className="pill">{NORMALIZED_ATTRIBUTE_NAME[parkAttribute]}</div>
 				} else {
 					return null
 				}

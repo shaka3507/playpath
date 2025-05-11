@@ -25,9 +25,8 @@ export default function Playground({ result, onClick }) {
 	const [favorite, setFavorite] = useState(false)
 	const [isParkPage, setIsParkPage] = useState(false)
 
-	const playgroundRoute = window.location.href.includes('/play/')
-
 	useEffect(() => {
+		const playgroundRoute = window.location.href.includes('/play/')
 		if(playgroundRoute) {
 			setIsParkPage(true)
 			const selection = getLocalStorageItem('playground')
@@ -67,11 +66,8 @@ export default function Playground({ result, onClick }) {
 		setLocalStorageItem('favorites', newData)
 	}
 
-	const hasFeature = (feature) => data[feature] == "1"
-
 	const getSrc = (playgroundName) => {
 		const formattedPlaygroundName = playgroundName.toLowerCase().replace(' ', '_')
-		console.log("format", formattedPlaygroundName)
 		return `https://playgrounder-images.s3.us-east-2.amazonaws.com/${formattedPlaygroundName}.jpg`
 	}
 

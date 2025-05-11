@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { getLocalStorageItem } from '../localStorageUtil'
-import { fakeWeatherData } from './fakeWeatherData.js'
+// import { fakeWeatherData } from '../data/fakeWeatherData.js'
 
 
 // based off https://open-meteo.com/en/docs?current=precipitation#weather_variable_documentation
@@ -48,7 +48,6 @@ export default function Weather() {
         throw new Error(`Response status: ${response.status}`)
       }
       const json = await response.json()
-      console.log("json", json)
       return json
     } catch (error) {
       console.error(error.message)

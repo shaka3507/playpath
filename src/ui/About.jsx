@@ -9,9 +9,7 @@ export default function About() {
             <div>
                 <p>This tool is for searching the Chicago playgrounds utilizing public Chicago city data</p>
                 <p>This was made for educational purposes only.</p>
-
             </div>
-
         </div>
     )
 }

@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, Link, useParams, useNavigate } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
-import "./App.css";
-import Title from "./ui/Title.jsx";
 import PlaygroundList from "./ui/PlaygroundList.jsx";
 import heroPic from "./assets/slide.jpg";
 import Playground from "./ui/Playground";
 import About from "./ui/About";
 import Nav from "./ui/Nav.jsx";
 import Planner from "./ui/Planner.jsx";
+
+import "./App.css";
 
 export function Search({
   handleSubmit,
@@ -48,7 +48,7 @@ function Home() {
     <div className="main">
       <Nav active="home" />
       <div className="landing">
-        <Title titleText="Playgrounder" />
+        <h1 className="title">Playgrounder</h1>
         <Search
           handleInputChange={handleInputChange}
           handleSubmit={handleSubmit}
