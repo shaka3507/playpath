@@ -11,6 +11,8 @@ export default function Planner() {
     const [favorites, setFavorites] = useState([])
     const [itinerary, setItinerary] = useState([])
 
+    const emailSubject = "Look%20What%20I%20Planned%20Using%20Playgrounder"
+
     const updateItinerary = (itineraryAction, itineraryLabel) => {
         if(itineraryAction === 'add') {
             setItinerary([...itinerary, itineraryLabel])
@@ -24,7 +26,14 @@ export default function Planner() {
         setFavorites(favoriteData)
     }, [])
 
-    const SEVEN_DAYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+    const SEVEN_DAYS = ['1) monday', '2) tuesday', '3) wednesday', '4) thursday', '5) friday', '6) saturday', '7) sunday']
+
+    const getEmailBody = () => {
+        // sorts - using number (to keep days in order)
+        // joins spaces using proper encoding
+        // uppercases
+        return itinerary.sort().join('%0D%0A').replace(' ', '%20').toUpperCase()
+    }
 
     return (
         <div className="main container">
@@ -35,7 +44,7 @@ export default function Planner() {
                 {favorites?.length && SEVEN_DAYS.map(day => <PlannerDay key={day} day={day} favorites={favorites} updateItinerary={updateItinerary} />)}
                 {!favorites && <div> add to your favorites first before adding to your weekly itinerary - <Link to="/">go back to search</Link></div>}
             </div>
-            {!!itinerary.length && <div className="share-container"><a href={`mailto:&?subject=Look%20What%20I%20Planned%20&body=${itinerary.join('%0D%0A').replace(' ', '%20').toUpperCase()}`} className="share-btn">Share itinerary</a></div>}
+            {!!itinerary.length && <div className="share-container"><a href={`mailto:&?subject=${emailSubject}&body=${getEmailBody()}`} className="share-btn">Share itinerary</a></div>}
         </div>
     )
 }

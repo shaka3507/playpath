@@ -3,14 +3,14 @@ import { useState } from 'react'
 export default function PlannerDay({ day, favorites, updateItinerary }) {
     const [dayPlayground, setPlaygroundDay] = useState('')
 
-    const selectPlayground = (fave) => {
-        setPlaygroundDay(fave)
-        updateItinerary('add', `${day.substring(0,3)} - ${fave.label}`)
+    const selectPlayground = (playground) => {
+        setPlaygroundDay(playground)
+        updateItinerary('add', `${day.substring(0,6)} - ${playground.label} park: - ${playground.location}`)
     }
 
     const removePlayground = (playground) => {
         setPlaygroundDay('')
-        updateItinerary('remove', `${day.substring(0,3)} - ${playground.label}`)
+        updateItinerary('remove', `${day.substring(0,6)} - ${playground.label} park: - ${playground.location}`)
     }
 
     return (

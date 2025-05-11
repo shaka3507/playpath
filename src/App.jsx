@@ -1,14 +1,13 @@
-import { useState, useEffect } from "react";
-import { Routes, Route, Link, useParams, useNavigate } from "react-router-dom";
-import { BrowserRouter as Router } from "react-router-dom";
-import PlaygroundList from "./ui/PlaygroundList.jsx";
-import heroPic from "./assets/slide.jpg";
-import Playground from "./ui/Playground";
-import About from "./ui/About";
-import Nav from "./ui/Nav.jsx";
-import Planner from "./ui/Planner.jsx";
+import { useState, useEffect } from "react"
+import { Routes, Route, Link, useParams, useNavigate } from "react-router-dom"
+import { BrowserRouter as Router } from "react-router-dom"
+import PlaygroundList from "./ui/PlaygroundList.jsx"
+import Playground from "./ui/Playground"
+import About from "./ui/About"
+import Nav from "./ui/Nav.jsx"
+import Planner from "./ui/Planner.jsx"
 
-import "./App.css";
+import "./App.css"
 
 export function Search({
   handleSubmit,
@@ -25,7 +24,7 @@ export function Search({
         value={search}
       />
     </form>
-  );
+  )
 }
 
 function Home() {

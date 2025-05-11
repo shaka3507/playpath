@@ -49,3 +49,12 @@ An app for finding, favoriting and planning your playground adventures in Chicag
 - Favorited playgrounds can be added to your weekly itinerary on the /planner page
 - Playgrounds added to your itinerary are ready to be shared via email (mailto link).
 - Favorited playgrounds are saved to your local storage
+
+### Images
+- Main playground illustration from iStock by Getty Images by [Aluna1](https://www.istockphoto.com/vector/playground-graphic-black-white-landscape-sketch-illustration-vector-gm1974900032-558664417)
+- Playground pictures for the 60619 zipcode from [chicago playgrounds website](https://chicagoplaygrounds.com/s/guide/page/welcome) and uploaded to my personal AWS S3 bucket.
+
+
+### Sources:
+- How to create an email link: https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Creating_links#email_links
+- Alternating color of elements: https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child

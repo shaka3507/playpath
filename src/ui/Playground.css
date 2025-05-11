@@ -96,6 +96,7 @@
 		background-image: url('../assets/suggestion-blob.svg');
     padding: 4px;
     height: 100px;
+    font-weight: 800;
 		background-color: white;
 		margin: 0 auto;
 		width: fit-content;
@@ -126,6 +127,13 @@
   background-color: hwb(4 37% 33%);
 }
 
+#googleIcon {
+  background-image: url('./assets/google-maps.png');
+  height: 24px;
+  background-size: contain;
+  background-repeat: no-repeat, repeat;
+  background-position: center;
+}
 
 .card-header {
 	display: flex;

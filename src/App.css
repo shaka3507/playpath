@@ -22,6 +22,7 @@
   padding: 20px;
   font-size: 18px;
 }
+
 .main {
   background-image: url('./assets/playground-illustration.jpg');
   height: 100vh;
@@ -115,25 +116,4 @@
   }
   font-size: 18px;
 }
-
-/* favorite */
-
-.favorite-card {
-  background-color: black !important;
-  color: white;
-}
-
-#googleIcon {
-  background-image: url('./assets/google-maps.png');
-  height: 24px;
-  background-size: contain;
-  background-repeat: no-repeat, repeat;
-  background-position: center;
-}
-
-.location-container {
-  display: flex;
-}
-
-
 
