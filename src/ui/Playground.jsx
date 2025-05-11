@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import Weather from './Weather.jsx'
 import Features from './Features.jsx'
 
-const NO_IMG_PLACEHOLDER = 'https://playgrounder-images.s3.us-east-2.amazonaws.com/no_picture.png'
+const NO_IMG_PLACEHOLDER = 'https://playgrounder-images.s3.us-east-2.amazonaws.com/playground_illustration_color.png'
 
 function googleMapLink(address) {
 	const formattedAddress = address.replace(' ', '+')
@@ -78,10 +78,8 @@ export default function Playground({ result, onClick }) {
 				<h1 className="plaground-title">{data.label}</h1>
 				{favorite && isParkPage && <Link to="/planner">+ to planner 📅</Link>}
 				<p>{data.park_class}</p>
-				<a className="address" target="_blank" href={googleMapLink(data.location)}>{data.location}</a>
-				<div className="features">
-					<Features data={data} />
-				</div>
+				<div id="googleIcon" /><a className="address" target="_blank" href={googleMapLink(data.location)}>{data.location} </a>
+				<Features data={data} />
 				<p>size: {data.acres} acres </p>
 				<p><button className="save" onClick={saveFavorite}>{favorite ? 'Remove from favorites' : 'favorite'}</button></p>
 			</div>

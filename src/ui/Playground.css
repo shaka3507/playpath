@@ -35,10 +35,6 @@
 	box-shadow: 4px 4px black;
 }
 
-.address {
-	color: black;
-}
-
 .img {
 	width: 400px;
 	height: 100%;
@@ -98,27 +94,44 @@
 	div {
 		text-align: center;
 		background-image: url('../assets/suggestion-blob.svg');
-        padding: 4px;
-        height: 100px;
+    padding: 4px;
+    height: 100px;
 		background-color: white;
 		margin: 0 auto;
 		width: fit-content;
 		font-size: 48px;
-        background-size: 400px;
-        background-position: center;
-        background-repeat: no-repeat;
+    background-size: 400px;
+    background-position: center;
+    background-repeat: no-repeat;
 	}
 }
 
 .play-card {
 	width: 400px;
+	border-radius: 16px;
+	box-shadow: 2px 4px black;
 }
+
+/*alternates background color of cards*/
+
+.play-card:nth-child(even) {
+  background-color: #878b68;
+}
+
+.play-card:nth-child(odd) {
+  background-color: #557ea7f2;
+}
+
+.play-card:nth-child(3n-1) {
+  background-color: hwb(4 37% 33%);
+}
+
 
 .card-header {
 	display: flex;
 	justify-content: flex-end;
 	position: absolute;
-	z-index: 100;
+	z-index: 99;
 	padding: 4px 8px;
 	font-size: 24px;
 }
@@ -174,6 +187,7 @@
 	background-color: #FAF9F6;
 }
 
+
 @media (max-width: 500px) {
 	.playground-page {
 		width: 100%;
@@ -187,7 +201,7 @@
 		justify-content: center;
 	}
   .weather-widget {
-  	width: 150px;
+  	width: 100px;
   	> p {
   		font-size: 18px;
   	}
