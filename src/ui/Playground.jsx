@@ -4,21 +4,20 @@ import { getLocalStorageItem, setLocalStorageItem } from '../localStorageUtil.js
 import Nav from './Nav.jsx'
 import { Link } from 'react-router-dom'
 import Weather from './Weather.jsx'
+import Features from './Features.jsx'
 
-function Feature({ children }) {
-	return (<div className="pill">{children}</div>)
-}
+const NO_IMG_PLACEHOLDER = 'https://playgrounder-images.s3.us-east-2.amazonaws.com/no_picture.png'
 
-function getRandomBackground() {
-	if(window.location.href.includes('/play/')) return
+function getRandomBackground(isParkPage) {
+	if(isParkPage) return ''
 	const backgroundColor = ['brightred', 'skyblue', 'jeanblue', 'olivegreen', 'brownred', 'brightred', 'skyblue', 'jeanblue', 'olivegreen', 'brownred']
 	const index =  Math.floor(Math.random() * 9)
 	return backgroundColor[index]
 }
 
 function googleMapLink(address) {
-	const str = address.replace(' ', '+')
-	return `https://www.google.com/maps/place/${str}+Chicago+IL`
+	const formattedAddress = address.replace(' ', '+')
+	return `https://www.google.com/maps/place/${formattedAddress}+Chicago+IL`
 }
 
 export default function Playground({ result, onClick }) {
@@ -44,7 +43,6 @@ export default function Playground({ result, onClick }) {
 	}
 
 	useEffect(() => {
-		console.log('pl', window.location.href)
 		const favoriteData = getLocalStorageItem('favorites') || []
 		if(favoriteData.length) {
 			const isFavorite = hasId(favoriteData, data.objectid_1)
@@ -71,24 +69,30 @@ export default function Playground({ result, onClick }) {
 
 	const hasFeature = (feature) => data[feature] == "1"
 
+	const getSrc = (playgroundName) => {
+		const formattedPlaygroundName = playgroundName.toLowerCase().replace(' ', '_')
+		console.log("format", formattedPlaygroundName)
+		return `https://playgrounder-images.s3.us-east-2.amazonaws.com/${formattedPlaygroundName}.jpg`
+	}
+
+	const onImgError = (e) => {
+		e.currentTarget.oneerror = null
+		e.currentTarget.src = NO_IMG_PLACEHOLDER
+	}
+
 	return (
 		<div onClick={onClick}>
 			<Nav active="play" />
-			<div className={`playground-page ${getRandomBackground()}`}>
+			<div className={`playground-page ${getRandomBackground(isParkPage)} ${!isParkPage ? 'play-card' : ''}`}>
 				{favorite && !isParkPage && <div className="card-header">❤️</div>}
-				<img className="img" />
+				{isParkPage && <img className="img" src={getSrc(data.label)} onError={onImgError}/>}
 				<div className="playground-text">
 					<h1 className="plaground-title">{data.label}</h1>
 					{favorite && isParkPage && <Link to="/planner">+ to planner 📅</Link>}
 					<p>{data.park_class}</p>
 					<a className="address" target="_blank" href={googleMapLink(data.location)}>{data.location}</a>
 					<div className="features">
-						{hasFeature("beach") && <Feature>beach</Feature>}
-						{hasFeature("playground") && <Feature>playground</Feature>}
-						{hasFeature("gymnasium") && <Feature>gym</Feature>}
-						{hasFeature("garden") && <Feature>garden</Feature>}
-						{hasFeature("water_play") && <Feature>water play</Feature>}
-						{hasFeature("pool_outdo") && <Feature>pool</Feature>}
+						<Features data={data} />
 					</div>
 					<p>size: {data.acres} acres </p>
 					<p><button className="save" onClick={saveFavorite}>{favorite ? 'Remove from favorites' : 'favorite'}</button></p>

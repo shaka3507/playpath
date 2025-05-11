@@ -18,8 +18,8 @@
 
 .features {
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: center;
-	width: 50%;
 	margin: 0 auto;
 }
 
@@ -30,7 +30,7 @@
 	border-radius: 12px;
 	border: 1px solid black;
 	color: black;
-	margin: 0 8px;
+	margin: 4px 8px;
 	background-color: white;
 	box-shadow: 4px 4px black;
 }
@@ -41,8 +41,7 @@
 
 .img {
 	width: 400px;
-	border-top-left-radius: 8px;
-	border-top-right-radius: 8px;
+	height: 100%;
 }
 
 
@@ -61,9 +60,9 @@
 }
 
 .playground-page {
-	display: block;
-	margin: 20px 0;
-	border: 2px solid black;
+	margin-top: 80px;
+	display: inline-block;
+	text-align: center;
 	color: black;
 	.img {
 		border-radius: 0 !important;
@@ -111,6 +110,10 @@
 	}
 }
 
+.play-card {
+	width: 400px;
+}
+
 .card-header {
 	display: flex;
 	justify-content: flex-end;
@@ -121,18 +124,27 @@
 }
 
 .playground-text {
+	height: 300px;
 	padding: 20px 8px;
 	h1 {
-		font-size: 28px;
+		font-size: 1.2em;
 		font-weight: 700;
 		text-transform: uppercase;
 	}
 }
 
+.weather-container {
+  display: flex;
+  justify-content: flex-end;
+  position: absolute;
+  top: 50px;
+  z-index: 100;
+  right: 0;
+}
+
 .weather-widget {
   color: black;
   font-size: 14px;
-  margin-top: 60px;
   text-align: left;
   padding: 8px;
   font-weight: 700;
@@ -162,20 +174,22 @@
 	background-color: #FAF9F6;
 }
 
-.weather-container {
-  display: flex;
-  position: absolute;
-  top: 0;
-  right: 10px;
-}
-
 @media (max-width: 500px) {
+	.playground-page {
+		width: 100%;
+	}
+	.playground-text {
+		width: unset;
+	}
+	.weather-container {
+		top: unset;
+		bottom: 20px;
+		justify-content: center;
+	}
   .weather-widget {
-  	width: 80px;
-  	font-size: 10px;
-  	margin-top: 250px;
+  	width: 150px;
   	> p {
-  		font-size: 12px;
+  		font-size: 18px;
   	}
   }
 }
