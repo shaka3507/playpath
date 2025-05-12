@@ -43,7 +43,8 @@ Assets
 ## Demo
 (done in class)
 
-## PDF with code
+## Code Documents
+(included in zip file)
 
 
 ## Explanation of requirements
