@@ -8,6 +8,38 @@ An app for finding, favoriting and planning your playground adventures in Chicag
 [Live URL](https://playgrounder-a77bf4c8a830.herokuapp.com/)
 
 
+## Files Created/Crafted
+
+CSS
+- index.css
+- App.css
+- ui/Playground.css
+- ui/Planner.css
+
+JSX
+- ui/About.jsx
+- ui/Features.jsx
+- ui/Nav.jsx
+- ui/Planner.jsx
+- ui/PlannerDay.jsx
+- ui/Playground.jsx
+- ui/PlaygroundList.jsx
+- ui/Weather.jsx
+- App.jsx
+
+JS
+- ui/usePlayground.js
+- localStorageUtil.js
+
+Saved data from API for local debugging (not used in final project)
+- data/fakePlaygroundData.js
+- data/fakeWeatherData.js
+
+
+Assets
+(added for display)
+
+
 ## Demo
 (done in class)
 
